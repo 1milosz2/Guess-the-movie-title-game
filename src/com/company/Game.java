@@ -12,17 +12,21 @@ public class Game {
     public Game() throws FileNotFoundException {
         this.titleUncovered = (filmToBeGuessed.getTitle());
         this.titleUndercover = coverTitle(filmToBeGuessed.getTitle());
-        setAttempts(6);
+        setAttempts(15);
     }
 
     Film filmToBeGuessed = new Film ();
 
-//    StringBuilder titleUncoveredBulider = new StringBuilder(titleUncovered);
-
-
-
     public String getTitleUndercover() {
         return titleUndercover;
+    }
+
+    public String getTitleUncovered() {
+        return titleUncovered;
+    }
+
+    public void setTitleUndercover(String titleUndercover) {
+        this.titleUndercover = titleUndercover;
     }
 
     public String coverTitle (String title) {
@@ -39,19 +43,24 @@ public class Game {
 
     public String uncoverLetter (String guess, String titleUndercover) {
 
-        StringBuilder titleUndercoverBulider = new StringBuilder(titleUndercover);
+        StringBuilder titleUndercoverBuilder = new StringBuilder(titleUndercover);
     if (titleUncovered.contains(guess)){
+        int j=0;
+        for (int i = 0; i < titleUncovered.length(); i++) {
+            if (titleUncovered.indexOf(guess, j) < 0) break;
+            else
+            titleUndercoverBuilder.setCharAt(titleUncovered.indexOf(guess, j), guess.charAt(0));
+            j++;
 
-        titleUndercoverBulider.setCharAt(titleUncovered.indexOf(guess), guess.charAt(0));
-//        titleUncoveredBulider.setCharAt(titleUncovered.indexOf(guess, guess.charAt(0)));
+        }
+
+//        titleUndercoverBuilder.setCharAt(titleUncovered.indexOf(guess, guess.charAt(0)));
 
 
     }
 
-        return titleUndercoverBulider.toString();
+        return titleUndercoverBuilder.toString();
     }
-
-
 
     public int getAttempts() {
         return attempts;
@@ -61,11 +70,4 @@ public class Game {
         this.attempts = attempts;
     }
 
-    public void setTitleUncovered(String titleUncovered) {
-        this.titleUncovered = titleUncovered;
-    }
-
-    public String getTitleUncovered() {
-        return titleUncovered;
-    }
 }

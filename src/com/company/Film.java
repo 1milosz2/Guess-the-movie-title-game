@@ -1,16 +1,17 @@
 package com.company;
 
 import java.io.FileNotFoundException;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Film {
 
     TitlesListManager myTitlesListManager = new TitlesListManager ();
 
     private String title;
-    private int random = (int ) Math.random()*(myTitlesListManager.TitlesList.size()+1);
+    int random = ThreadLocalRandom.current().nextInt(0, myTitlesListManager.TitlesList.size() + 1);
 
     public Film() throws FileNotFoundException {
-        this.title = myTitlesListManager.TitlesList.get(random);
+        this.title = setTitle();
     }
 
     public String getTitle() {
@@ -18,8 +19,9 @@ public class Film {
     }
 
 
-
-
+    public String setTitle() {
+        return myTitlesListManager.getTitle(random);
+    }
 
 
 }

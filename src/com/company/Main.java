@@ -9,38 +9,46 @@ public class Main {
 
         Game myGame = new Game();
         Scanner scanner = new Scanner(System.in);
-        StringBuilder myName = new StringBuilder(myGame.getTitleUndercover());
-
-
-        System.out.println(myName);
-
 
         System.out.println("Hey let's guess the film title");
 
         System.out.println(myGame.getTitleUndercover());
 
+        System.out.println("How many attempts you want to have?");
+
+        myGame.setAttempts(scanner.nextInt());
+        String aguess = scanner.nextLine();
+
         while (myGame.getAttempts() > 0) {
 
-            System.out.println("Guess a letter");
             System.out.println("You have " + myGame.getAttempts() + " attempts left");
 
-            String guess = scanner.next();
-
+            String guess = scanner.nextLine();
 
             if (guess.length() > 1) {
                 if (guess.equals(myGame.getTitleUncovered())) {
-                    System.out.println("Congratulation you won");
+                    System.out.println("Congratulations, you have won");
+                    break;
                 }
                 else System.out.println("It's not a hidden title. If your not certain guess single letters");
             }
+            else
 
-            myGame.uncoverLetter(guess, myGame.getTitleUndercover());
-            System.out.println(myGame.filmToBeGuessed.getTitle());
-            System.out.println(myGame.uncoverLetter(guess, myGame.getTitleUndercover()));
+            if (guess.length() < 1)
+                System.out.println("C'mon type in smthg");
+            else
+
+            myGame.setTitleUndercover(myGame.uncoverLetter(guess, myGame.getTitleUndercover()));
+//                System.out.println(myGame.getTitleUncovered());
+            System.out.println(myGame.getTitleUndercover());
 
          myGame.setAttempts(myGame.getAttempts()-1);
         }
 
+        if (myGame.getAttempts() == 0)
+
+            System.out.println("All attempts have been used. Try once more");
+        System.out.println("It was " + myGame.getTitleUncovered());
 
 
 
