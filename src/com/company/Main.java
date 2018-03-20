@@ -47,9 +47,9 @@ public class Main {
          myGame.setAttempts(myGame.getAttempts()-1);
         }
 
-        if (myGame.getAttempts() == 0)
-
+        if (myGame.getAttempts() == 0) {
             System.out.println("All attempts have been used. Try once more");
-        System.out.println("It was " + myGame.getTitleUncovered());
+            System.out.println("It was " + myGame.getTitleUncovered());
+        }
     }
 }
