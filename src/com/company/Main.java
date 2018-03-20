@@ -25,20 +25,22 @@ public class Main {
 
             String guess = scanner.nextLine();
 
-            if (guess.length() > 1) {
-                if (guess.equals(myGame.getTitleUncovered())) {
-                    System.out.println("Congratulations, you have won");
+            switch (guess.length()){
+                case 0:
+                    System.out.println("C'mon type in smthg");
                     break;
-                }
-                else System.out.println("It's not a hidden title. If your not certain guess single letters");
+                case 1:
+                    myGame.setTitleUndercover(myGame.uncoverLetter(guess, myGame.getTitleUndercover()));
+                    break;
+                default:
+                    if (guess.equals(myGame.getTitleUncovered())) {
+                        System.out.println("Congratulations, you have won");
+                        break;
+                    }
+                    else System.out.println("It's not a hidden title. If your not certain guess single letters");
             }
-            else
 
-            if (guess.length() < 1)
-                System.out.println("C'mon type in smthg");
-            else
 
-            myGame.setTitleUndercover(myGame.uncoverLetter(guess, myGame.getTitleUndercover()));
 //                System.out.println(myGame.getTitleUncovered());
             System.out.println(myGame.getTitleUndercover());
 
@@ -49,10 +51,5 @@ public class Main {
 
             System.out.println("All attempts have been used. Try once more");
         System.out.println("It was " + myGame.getTitleUncovered());
-
-
-
-
-
     }
 }
