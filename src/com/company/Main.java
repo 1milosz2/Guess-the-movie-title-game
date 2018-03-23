@@ -1,55 +1,60 @@
 package com.company;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
 
-        Game myGame = new Game();
+
+    public static void main(String[] args) {
+
+        GameManager myGameManager = new GameManager();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Hey let's guess the film title");
 
-        System.out.println(myGame.getTitleUndercover());
+        System.out.println("Hey let's guess the movie title");
+
+        System.out.println(myGameManager.title.getMaskedString());
 
         System.out.println("How many attempts you want to have?");
 
-        myGame.setAttempts(scanner.nextInt());
+        myGameManager.setAttemptCounter(scanner.nextInt());
         String aguess = scanner.nextLine();
 
-        while (myGame.getAttempts() > 0) {
+        while (myGameManager.getAttemptCounter()>0) {
 
-            System.out.println("You have " + myGame.getAttempts() + " attempts left");
+            System.out.println("You have " + myGameManager.getAttemptCounter() + " attempts left");
 
             String guess = scanner.nextLine();
 
-            switch (guess.length()){
-                case 0:
-                    System.out.println("C'mon type in smthg");
-                    break;
-                case 1:
-                    myGame.setTitleUndercover(myGame.uncoverLetter(guess, myGame.getTitleUndercover()));
-                    break;
-                default:
-                    if (guess.equals(myGame.getTitleUncovered())) {
-                        System.out.println("Congratulations, you have won");
-                        break;
-                    }
-                    else System.out.println("It's not a hidden title. If your not certain guess single letters");
-            }
+//            switch (guess.length()) {
+//                case 0:
+//                    System.out.println("Try");
+//                    break;
+//                case 1:
+//                    myGameManager.setTitleUndercover(myGameManager.uncoverLetter(guess, myGameManager.getTitleUndercover()));
+//                    break;
+//                default:
+//                    if (guess.equals(myGameManager.getTitleUncovered())) {
+//                        System.out.println("Congratulations, you have won");
+//                        System.out.println("It was " + myGameManager.getTitleUncovered());
+//                        System.exit(0);
+//                    } else System.out.println("It's not a hidden title. If your not certain guess single letters");
+//            }
+//
+//
+////                System.out.println(myGameManager.getTitleUncovered());
+//            System.out.println(myGameManager.getTitleUndercover());
+//
+//            myGameManager.setAttemptCounter(myGameManager.getAttemptCounter() - 1);
+//        }
+//
+//
+//        System.out.println("All attempts have been used. Try once more");
+//        System.out.println("It was " + myGameManager.getTitleUncovered());
 
-
-//                System.out.println(myGame.getTitleUncovered());
-            System.out.println(myGame.getTitleUndercover());
-
-         myGame.setAttempts(myGame.getAttempts()-1);
         }
 
-        if (myGame.getAttempts() == 0) {
-            System.out.println("All attempts have been used. Try once more");
-            System.out.println("It was " + myGame.getTitleUncovered());
-        }
     }
+
 }
