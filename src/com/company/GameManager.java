@@ -14,6 +14,7 @@ public class GameManager {
 
     public GameManager() {
         this.title = getTitle();
+        setStatus(GameStatus.PENDING);
     }
 
     public void guess (char c) {
@@ -25,6 +26,12 @@ public class GameManager {
         String outcome = title.tryToRevealString(s);
         attemptCounter -- ;
         if (outcome == title.getUnmaskedString()) status = SUCCESS;
+    }
+
+    public void checkAttemptsCounter () {
+        if (!(attemptCounter > 0)) {
+            status = GameStatus.GAMEOVER;
+        }
     }
 
     public MaskedString getTitle() {
@@ -39,8 +46,8 @@ public class GameManager {
         return attemptCounter;
     }
 
-    public GameStatus getStatus() {
-        return status;
+    public void setStatus(GameStatus status) {
+        this.status = status;
     }
 }
 
