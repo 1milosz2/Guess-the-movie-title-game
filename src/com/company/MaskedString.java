@@ -46,6 +46,10 @@ public class MaskedString {
         return unmaskedString;
     }
 
+    public void setMaskedString(String maskedString) {
+        this.maskedString = maskedString;
+    }
+
     public String getMaskedString() {
         return maskedString;
     }

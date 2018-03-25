@@ -7,6 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        String input;
+
         GameManager myGameManager = new GameManager();
         Scanner scanner = new Scanner(System.in);
 
@@ -16,43 +18,29 @@ public class Main {
 
         System.out.println("How many attempts you want to have?");
 
-        myGameManager.setAttemptCounter(scanner.nextInt());
-        String aguess = scanner.nextLine();
+//        myGameManager.setAttemptCounter(scanner.nextInt());
+//        scanner.reset();
 
-        while (myGameManager.getAttemptCounter()>0) {
-
-            System.out.println("You have " + myGameManager.getAttemptCounter() + " attempts left");
-
-            String guess = scanner.nextLine();
-
-//            switch (guess.length()) {
-//                case 0:
-//                    System.out.println("Try");
-//                    break;
-//                case 1:
-//                    myGameManager.setTitleUndercover(myGameManager.uncoverLetter(guess, myGameManager.getTitleUndercover()));
-//                    break;
-//                default:
-//                    if (guess.equals(myGameManager.getTitleUncovered())) {
-//                        System.out.println("Congratulations, you have won");
-//                        System.out.println("It was " + myGameManager.getTitleUncovered());
-//                        System.exit(0);
-//                    } else System.out.println("It's not a hidden title. If your not certain guess single letters");
-//            }
-//
-//
-////                System.out.println(myGameManager.getTitleUncovered());
-//            System.out.println(myGameManager.getTitleUndercover());
-//
-//            myGameManager.setAttemptCounter(myGameManager.getAttemptCounter() - 1);
-//        }
-//
-//
-//        System.out.println("All attempts have been used. Try once more");
-//        System.out.println("It was " + myGameManager.getTitleUncovered());
-
+        while (true) {
+            myGameManager.checkAttemptsCounter();
+            switch (myGameManager.getStatus()) {
+                case PENDING:
+                    System.out.println("You have " + myGameManager.getAttemptCounter() + " attempts left.");
+                    System.out.println(myGameManager.title.getMaskedString());
+                    input = scanner.nextLine();
+                    if (input.length() > 1) {
+                        myGameManager.guess(input);
+                    } else myGameManager.guess(input.charAt(0));
+                    break;
+                case SUCCESS:
+                    System.out.println("Congratulations you have won");
+                    System.exit(0);
+                case GAMEOVER:
+                    System.out.println("Unfortunately you lost");
+                    System.out.println("It was " + myGameManager.title.getUnmaskedString());
+                    System.exit(0);
+            }
         }
-
     }
-
 }
+

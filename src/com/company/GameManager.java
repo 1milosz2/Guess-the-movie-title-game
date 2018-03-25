@@ -1,6 +1,5 @@
 package com.company;
 
-import static com.company.GameStatus.SUCCESS;
 
 public class GameManager {
 
@@ -9,45 +8,47 @@ public class GameManager {
 
 
     private MovieTitleLoader loader = new MovieTitleLoader();
-    MaskedString title = new MaskedString(loader.getRandomMovieTitle());
+    MaskedString title;
 
 
     public GameManager() {
-        this.title = getTitle();
-        setStatus(GameStatus.PENDING);
+        this.title = new MaskedString(loader.getRandomMovieTitle());
+        this.status = (GameStatus.PENDING);
+        this.attemptCounter = 10;
     }
 
     public void guess (char c) {
-        String outcome = title.tryToRevealLetter(c);
+        title.setMaskedString(title.tryToRevealLetter(c));
         attemptCounter -- ;
-        if (outcome == title.getUnmaskedString()) status = SUCCESS;
+        if (title.tryToRevealLetter(c) == title.getUnmaskedString()) setStatus(GameStatus.SUCCESS);
         }
     public void guess (String s) {
-        String outcome = title.tryToRevealString(s);
+        title.setMaskedString(title.tryToRevealString(s));
         attemptCounter -- ;
-        if (outcome == title.getUnmaskedString()) status = SUCCESS;
+        if (title.tryToRevealString(s) == title.getUnmaskedString()) setStatus(GameStatus.SUCCESS);
     }
 
     public void checkAttemptsCounter () {
         if (!(attemptCounter > 0)) {
-            status = GameStatus.GAMEOVER;
+            status = (GameStatus.GAMEOVER);
         }
-    }
-
-    public MaskedString getTitle() {
-        return title;
-    }
-
-    public void setAttemptCounter(int attemptCounter) {
-        this.attemptCounter = attemptCounter;
     }
 
     public int getAttemptCounter() {
         return attemptCounter;
     }
 
+    public void setAttemptCounter(int attemptCounter) {
+        this.attemptCounter = attemptCounter;
+    }
+
+    public GameStatus getStatus() {
+        return status;
+    }
+
     public void setStatus(GameStatus status) {
         this.status = status;
     }
+
 }
 
