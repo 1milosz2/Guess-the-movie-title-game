@@ -6,15 +6,13 @@ public class GameManager {
     private int attemptCounter;
     private GameStatus status;
 
-
     private MovieTitleLoader loader = new MovieTitleLoader();
-    MaskedString title;
+    private MaskedString title;
 
-
-    public GameManager() {
+    public GameManager(int attempts) {
         this.title = new MaskedString(loader.getRandomMovieTitle());
         this.status = (GameStatus.PENDING);
-        this.attemptCounter = 10;
+        this.attemptCounter = attempts;
     }
 
     public void guess (char c) {
@@ -48,6 +46,10 @@ public class GameManager {
 
     public void setStatus(GameStatus status) {
         this.status = status;
+    }
+
+    public MaskedString getTitle() {
+        return title;
     }
 
 }
