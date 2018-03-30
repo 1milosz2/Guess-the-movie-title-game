@@ -221,3 +221,7 @@ pip-log.txt
 .idea/workspace.xml
 out/production/Guess-the-movie-title-game/com/company/Main$1.class
 *.class
+out/production/Guess-the-movie-title-game/com/company/GameManager.class
+out/production/Guess-the-movie-title-game/com/company/Main.class
+out/production/Guess-the-movie-title-game/com/company/MaskedString.class
+*.xml
