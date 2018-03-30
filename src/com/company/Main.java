@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         String input;
+        boolean repeat = true;
 
         GameManager myGameManager = new GameManager(15);
         Scanner scanner = new Scanner(System.in);
@@ -19,7 +20,7 @@ public class Main {
 
         myGameManager.setAttemptCounter(Integer.parseInt(scanner.nextLine()));
 
-        while (true) {
+        while (repeat) {
             myGameManager.checkAttemptsCounter();
             switch (myGameManager.getStatus()) {
                 case PENDING:
@@ -32,13 +33,15 @@ public class Main {
                     break;
                 case SUCCESS:
                     System.out.println("Congratulations you have won");
-                    System.exit(0);
+                    repeat = false;
                 case GAMEOVER:
                     System.out.println("Unfortunately you lost");
                     System.out.println("It was " + myGameManager.getTitle().getUnmaskedString());
-                    System.exit(0);
+                    repeat = false;
             }
         }
+
+        System.exit(0);
     }
 }
 
